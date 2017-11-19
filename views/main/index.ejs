@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="index.css" rel="stylesheet" type="text/css">
+	<link href="popupBox.css" rel="stylesheet" type="text/css">
+	<link href="map.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans|Saira" rel="stylesheet">
+	<!-- <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+	<meta charset="utf-8"> -->
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<script src = "https://rawgit.com/Manak/dommy/master/dommy.js"></script>
+	<script src="./js/mapViewer.js"></script>
+	<script src="./js/photoRetriever.js"></script>
+	<script src="./js/loadPhotos.js"></script>
+	<script src="./js/index.js"></script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYavyt5BbZYcyuDUe14QhGJwHCb_qbnOE"></script>
+</head>
+<body>
+	<div id='photoViewer' class='popupBox'>
+		<div id ="mapContainer">
+			<div id = 'mapPopUpBox'>
+				<div id = 'map'> </div>
+			</div>
+		</div>
+		<div class='popupBoxContent'>
+			<span class='closeButton'>&times;</span>
+			<div class='infoPanelContent'></div>
+		</div>
+	</div>
+	<div class = "container">
+		<div class = "section-title"> PicIt</div>
+		<div class = "all-photos-container">
+			<div class = "column-1 column">
+			</div>
+			<div class = "column-2 column">
+			</div>
+			<div class = "column-3 column">
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

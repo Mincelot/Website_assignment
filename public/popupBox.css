@@ -1,0 +1,87 @@
+/* Render the background black when the box pops out*/
+.popupBox {
+	display: none;
+	background-color: rgba(0,0,0,0.75);
+    position: fixed; 
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+
+}
+/* A box to contain the image*/
+.popupBoxContent {
+	/*position: relative;*/
+	text-align: center;
+	background-color: #000000;
+    margin: 2% auto;
+    padding: 3px;
+    width: 75%;
+	/* Glowing borders */
+	outline: none;
+    border-color: #ffffff;
+    box-shadow: 0 0 15px #000000;
+}
+
+/* A close button that turns red when hover*/
+.closeButton {
+	color: #ffffff;
+    position: absolute;
+	top: 3px;
+	right: 10px;
+    font-size: 35px;
+	font-weight: bold;
+}
+.closeButton:hover,
+.closeButton:focus {
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Image contained in the box*/
+.popupBoximg {
+	width: 100%;
+	height: 100%;
+	margin: 1% auto;
+}
+
+/* Info box for the stat of photo */
+.infoPanelButton{
+	display:none;
+	background-color: rgba(0,0,0,0.4);
+	position: absolute;
+	bottom: 13px;
+	left:0px;
+    width: 100%;
+	height: 45px;
+	color: #ffffff;
+	font-size: 40px;
+	font-weight: bold;
+
+}
+
+.infoPanelContent{
+	position: absolute;
+	opacity:0;
+    top: 40px;
+    color: white;
+    width: 75%;
+    background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,0));
+    text-align: left;
+	font-family: 'Open Sans', sans-serif;
+    display:flex;
+    justify-content:space-between;
+    transition:opacity 300ms;
+}
+
+.popupBoxContent:hover .infoPanelContent{
+	opacity:1;
+}
+
+.infoPanelContent p{
+	padding: 10px;
+}
+

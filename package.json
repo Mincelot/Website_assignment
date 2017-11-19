@@ -1,0 +1,24 @@
+{
+  "name": "assignment-3-501brainnotimplemented",
+  "version": "1.0.0",
+  "description": "<style>\r main {font-size: 1.5em;}\r li {margin-bottom: 10px;}\r </style>\r <main>\r <h1>Assignment 3</h1>\r <h2>Final Project</h2>",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FallCSC309/assignment-3-501brainnotimplemented.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FallCSC309/assignment-3-501brainnotimplemented/issues"
+  },
+  "homepage": "https://github.com/FallCSC309/assignment-3-501brainnotimplemented#readme",
+  "dependencies": {
+    "ejs": "^2.5.7",
+    "express": "^4.16.2"
+  }
+}
