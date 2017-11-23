@@ -18,7 +18,10 @@
   },
   "homepage": "https://github.com/FallCSC309/assignment-3-501brainnotimplemented#readme",
   "dependencies": {
+    "assert": "^1.4.1",
     "ejs": "^2.5.7",
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "method-override": "^2.3.10",
+    "mongodb": "^2.2.33"
   }
 }
