@@ -1,97 +1,64 @@
-
-const express = require('express')
+const DB_uri = "mongodb://BrainNotImplemented:O4Z1kriMfKYZqW0c@cluster0-shard-00-00-7x83i.mongodb.net:27017,cluster0-shard-00-01-7x83i.mongodb.net:27017,cluster0-shard-00-02-7x83i.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin";
+const express = require('express');
 const methodOverride = require("method-override");
+
+var bodyParser = require('body-parser');
+var session = require('express-session');
+const app = express();
+
 var MongoClient = require('mongodb').MongoClient;
-var assert = require('assert');
-const app = express()
+var database = null;
+
+//Controllers
+var userController = require('./controllers/users.js');
+
+// Middleware starts here
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'))
-
 app.use(methodOverride("_method"));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(session(secret:'501brainnotimplemented'));
+/*
+Set database in every request. This way we don't have to make a new connection to 
+Mongo everytime.
+*/
+app.use(function(req, res, next){
+	req.database = database;
+	next();
+});
 
-var uri = "mongodb://BrainNotImplemented:O4Z1kriMfKYZqW0c@cluster0-shard-00-00-7x83i.mongodb.net:27017,cluster0-shard-00-01-7x83i.mongodb.net:27017,cluster0-shard-00-02-7x83i.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin"
+/*
+	Sets a variable that checks if the user is logged in. You can now use req.loggedIn to check if
+	the user is logged in.
+*/
+app.use(function(req,res,next){
+	if(req.session.userid){
+		req.loggedIn = true;
+	} else {
+		req.loggedIn = false;
+	}
+	next();
+});
+
+//Middleware ends here
 
 
-var createNewAccount = function(username, pass, db, callback){
-	var collection = db.collection('documents');
-	collection.insertOne({_id: 0, Username: username, Password: pass}, function(err, result){
-		console.log("Registered an account with username: " + username);
-		callback(result);
-	})
-}
+app.post('/user/create', userController.create);
 
-var findUsers = function(db, callback) {
-	  // Get the documents collection
-	  var collection = db.collection('documents');
-	  // Find some documents
-	  collection.find({}).toArray(function(err, users) {
-		console.log("Found the following records");
-		console.dir(users);
-		callback(users);
-  });
-}
-var deleteAllUsers = function(db, callback) {
-	var collection = db.collection('documents');
-	collection.deleteMany({});
-}
-
+app.post('/login', userController.login);
+app.post('/logout', userController.login);
 
 
 // Support routes
 app.get('/', (req, res) => {
-	res.redirect('/index')
-})
-
-app.get("/users/create", (req, res) => {
-	res.send("Create an account");
-
-	MongoClient.connect(uri, function(err, db) {
-		assert.equal(null, err);
-		console.log("Connected correctly to server");
-		createNewAccount("Testuser1", "123123",db, function() {
-			db.close();
-		});
-	});
+	res.render("main/index");
 });
 
-app.get('/users', (req, res) => {
-	res.send("Record of all users");
-	MongoClient.connect(uri, function(err, db) {
-		assert.equal(null, err);
-		console.log("Connected correctly to server");
-		findUsers(db, function() {
-			db.close();
-		});
-	})
-	
-})
-
-
-app.get("/users/deleteAll", (req, res) => {
-	res.send("Delete all accounts");
-
-	MongoClient.connect(uri, function(err, db) {
-		assert.equal(null, err);
-		console.log("Connected correctly to server");
-		deleteAllUsers(db, function() {
-			db.close();
-		});
-	});
+MongoClient.connect(DB_uri, function(err, db) {
+	console.log('Connected to database');
+	//Sets db into database
+	database = db;
+	app.listen(3000, () => console.log('Listening'));
 });
-
-// RESTFUL interface
-app.get("/index", (req, res) => {
-	res.render("main/index")
-})
-
-app.post("/users", (req, res) => {
-	res.redirect('/index')
-});
-
-app.delete("/users/:uid/:photoid", (req, res) => {
-	res.send("Suppose to delete a photo that the user liked.")
-	res.redirect("/index")
-})
-
-app.listen(3000, () => console.log('Listening'))

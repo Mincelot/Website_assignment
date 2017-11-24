@@ -19,8 +19,10 @@
   "homepage": "https://github.com/FallCSC309/assignment-3-501brainnotimplemented#readme",
   "dependencies": {
     "assert": "^1.4.1",
+    "body-parser": "^1.18.2",
     "ejs": "^2.5.7",
     "express": "^4.16.2",
+    "express-session": "^1.15.6",
     "method-override": "^2.3.10",
     "mongodb": "^2.2.33"
   }
