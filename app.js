@@ -19,7 +19,7 @@ app.use(express.static('public'))
 app.use(methodOverride("_method"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(session(secret:'501brainnotimplemented'));
+app.use(session({secret:'501brainnotimplemented'}));
 /*
 Set database in every request. This way we don't have to make a new connection to 
 Mongo everytime.
