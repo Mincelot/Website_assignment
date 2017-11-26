@@ -7,7 +7,6 @@ module.exports = {
 		if(req.body.username == undefined || req.body.password == undefined || req.body.firstName == undefined || req.body.lastName == undefined){
 			return res.status(400).json({error:"Missing fields"});
 		}
-		
 		req.db.collection('users').insert({
 			username : req.body.username, 
 			password : crypto.createHash('md5').update(req.body.password).digest("hex"),
@@ -15,9 +14,12 @@ module.exports = {
 			lastName : req.body.lastName
 		}, function(err, result){
 			if(err){
-				return res.status(500).json({error:"Unable to insert user"})
+				if(err.code == 11000){
+					return res.status(409).json({error:"Username is taken"});
+				}
+				return res.status(500).json({error:"Unable to insert user"});
 			}
-			return res.status(200);
+			return res.status(200).send();
 		});
 	},
 	login: function(req,res, next){
@@ -37,7 +39,7 @@ module.exports = {
 				req.session.username = result.username;
 				req.session.firstName = result.firstName;
 				req.session.lastName = result.lastName;
-				req.session.userId = result['_id'].str;
+				req.session.userId = result['_id'].toString();
 				return res.status(200).json({success:'user logged in'});
 			}
 		});
@@ -45,6 +47,25 @@ module.exports = {
 	logout: function(req,res, next){
 		delete req.session;
 		return res.status(200).json({success:'user logged out'});
+	},
+	get: function(req,res,next){
+		if(!req.loggedIn && !req.query.uid){
+			return res.status(401).json({error:'no logged in user'});
+		}
+		req.db.collection('users').findOne({
+			username:req.query.uid?req.query.uid:req.session.username
+		}, function(err, result){
+			if(err){
+				return res.status(500).json({error:"Something went wrong"});
+			}
+			if(result == null){
+				return res.json({});
+			}
+			return res.json({
+				username:result.username,
+				firstName:result.firstName,
+				lastName:result.lastName
+			});
+		});
 	}
-
 };

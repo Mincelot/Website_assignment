@@ -25,7 +25,7 @@ Set database in every request. This way we don't have to make a new connection t
 Mongo everytime.
 */
 app.use(function(req, res, next){
-	req.database = database;
+	req.db = database;
 	next();
 });
 
@@ -34,7 +34,8 @@ app.use(function(req, res, next){
 	the user is logged in.
 */
 app.use(function(req,res,next){
-	if(req.session.userid){
+	console.log(req.session);
+	if(req.session.userId){
 		req.loggedIn = true;
 	} else {
 		req.loggedIn = false;
@@ -45,7 +46,8 @@ app.use(function(req,res,next){
 //Middleware ends here
 
 
-app.post('/user/create', userController.create);
+app.put('/user', userController.create);
+app.get('/user', userController.get);
 
 app.post('/login', userController.login);
 app.post('/logout', userController.login);
