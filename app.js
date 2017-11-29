@@ -11,6 +11,7 @@ var database = null;
 
 //Controllers
 var userController = require('./controllers/users.js');
+var messageController = require('./controllers/messages.js');
 
 // Middleware starts here
 
@@ -51,6 +52,10 @@ app.get('/user', userController.get);
 
 app.post('/login', userController.login);
 app.post('/logout', userController.login);
+
+app.get('/api/messages', messageController.get);
+app.post('/api/messages', messageController.broadcast);
+app.delete('/api/messages/:msgId', messageController.delete);
 
 
 // Support routes
