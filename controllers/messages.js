@@ -7,23 +7,26 @@ module.exports = {
 			return res.status(400).json({error:"Missing fields: message"});
 		}
 		req.db.collection('counters').findAndModify({_id: "messageId" }, [['_id','asc']], {$inc:{sequence_value: 1}},{new:true}, function(err, doc){
-			req.db.collection('messages').insert({msgId : doc.value.sequence_value, message : req.body.message}, function(err, result){
-				if (err){
-					if (err.code == 11000){
-						return res.status(409).json({error:"Message already exist."});
-					}
-					return res.status(500).json({error:"Unable to insert message"});
+			req.db.collection('users').find({}, {_id: false, username: true}).toArray(function(err, usernameList){
+				var l = [];
+				for (i = 0; i < usernameList.length; i++){
+					l.push(usernameList[i]["username"]);
 				}
-				return res.status(200).send();
+				req.db.collection('messages').insert({msgId : doc.value.sequence_value, message : req.body.message, receivers : l}, function(err, result){
+					if (err){
+						if (err.code == 11000){
+							return res.status(409).json({error:"Message already exist."});
+						}
+						return res.status(500).json({error:"Unable to insert message"});
+					}
+					return res.status(200).send();
+				});
 			});
 		});
 		
 	},
 	get : function(req, res, next){
 		/*req.db.listCollections().toArray(function(err, result){
-			console.log(result);
-		});*/
-		/*req.db.collection('counters').find({}).toArray(function(err, result){
 			console.log(result);
 		});*/
 		req.db.collection('messages').find({}, {_id : false}).toArray(function(err, result){
@@ -33,7 +36,7 @@ module.exports = {
 			if(result == null){
 				return res.json({});
 			}
-			return res.json(result);
+			return res.send(result);
 		});
 	},
 	delete : function(req, res, next){
@@ -44,11 +47,26 @@ module.exports = {
 				return res.status(500).json({error:"Unable to delete message"});
 			}
 			if (results.result.n > 0){
-				return res.status(200).json("Deleted message");
+				return res.status(200).send("Deleted message");
 			}
 			else{
-				return res.status(200).json("Failed to delete the message");
+				return res.status(200).send("Failed to delete the message");
 			}
+		});
+	},
+	getMsgstoUser : function(req, res, next){
+		req.db.collection('messages').find({receivers: req.session.username}).toArray(function(err, msgs){
+			if(err){
+				return res.status(500).json({error:"Retrieval for message failed"});
+			}
+			if(msgs == null){
+				return res.json({});
+			}
+			var usermsgs = [];
+			for (i = 0; i < msgs.length; i++){
+				usermsgs.push(msgs[i]["message"]);
+			}
+			return res.json({data: usermsgs});
 		});
 	}
 }	

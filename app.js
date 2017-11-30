@@ -51,13 +51,20 @@ app.put('/user', userController.create);
 app.get('/user', userController.get);
 
 app.post('/login', userController.login);
-app.post('/logout', userController.login);
+app.post('/logout', userController.logout);
 
 app.get('/api/messages', messageController.get);
 app.post('/api/messages', messageController.broadcast);
 app.delete('/api/messages/:msgId', messageController.delete);
 
-
+app.get('/user/messages', function(req, res, next){
+	if (req.loggedIn){
+		messageController.getMsgstoUser(req, res, next);
+	} else {
+		res.send("Please login first!");
+		// Redirect to login screen
+	}
+});
 // Support routes
 app.get('/', (req, res) => {
 	res.render("main/index");
