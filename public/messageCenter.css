@@ -1,0 +1,41 @@
+
+/* Remove margins and padding from the list */
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+/* Style the list items */
+ul li {
+	font-family: 'Open Sans', sans-serif;
+    position: relative;
+    padding: 12px 8px 12px 40px;
+    background: rgba(230, 230, 230, 0.7);
+    font-size: 25px;
+    transition: 0.5s;
+}
+
+/* Set all odd list items to a different color (zebra-stripes) */
+ul li:nth-child(odd) {
+    background: rgba(249, 249, 249, 0.7);;
+}
+
+/* Darker background-color on hover */
+ul li:hover {
+    background: #ddd;
+}
+
+
+/* Style the header */
+.msgBaner {
+	font-family: 'Open Sans', sans-serif;
+    background-color: rgba(255, 255, 255, 0.5);;
+    padding: 20px 30px;
+    text-align: left;
+}
+
+.welcome {
+	text-align: center;
+	font-size: 20px;
+}
+
