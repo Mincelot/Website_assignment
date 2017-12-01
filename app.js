@@ -58,9 +58,7 @@ app.post('/api/messages', messageController.broadcast);
 app.delete('/api/messages/:msgId', messageController.delete);
 
 app.get('/user/messages', function(req, res, next){
-	// -------------- This is only for testing! Remove the negation and change session username once login page is up !!!! ----------------------
-	if (!req.loggedIn){
-		req.session.username = "test1";
+	if (req.loggedIn){
 		messageController.getMsgstoUser(req, res, function (msgs){
 			console.log(msgs);
 			res.render("user/messageCenter",{data : {username: req.session.username, messages: msgs}});
