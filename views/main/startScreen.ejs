@@ -1,0 +1,39 @@
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="startScreen.css">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="./js/startScreen.js"></script>
+  <script src = "https://rawgit.com/Manak/dommy/master/dommy.js"></script>
+</head>
+</body>
+    <h1 id = appName> Pic.<span style="color:#ff521e">it</span></h1>
+    <div class = "whiteBox">
+      <div id = "slogan"> Sign up to explore pictures, and set them as your
+        desktop background. </div>
+      <div id = "userNameError"> Username is already taken. </div>
+      <div id = "missingFields"> Missing fields. </div>
+      <div class = "inputContainer">
+        <form>
+          <ul class = "flex-outer">
+            <li>
+              <input type = "text" id="firstName" placeholder="First Name">
+            </li>
+            <li>
+              <input type = "text" id="lastName" placeholder="Last Name">
+            </li>
+            <li>
+              <input type = "text" id="userName" placeholder="Username">
+            </li>
+            <li>
+              <input type = "text" id="password" placeholder="Password">
+            </li>
+          </ul>
+        </form>
+      </div>
+      <div class = "signUpWrapper">
+        <button id = "signUpButton"> Sign up </button>
+      </div>
+      <p id= "loginLink"> Have an account? <a  style="color:#ff521e" href="login.ejs">Log in</a></p>
+    </div>
+</body>
+</html>

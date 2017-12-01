@@ -1,0 +1,32 @@
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="startScreen.css">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <!-- kept the same style sheet because most of the styles are the same as the sign up page -->
+  <script src="./js/login.js"></script>
+  <script src = "https://rawgit.com/Manak/dommy/master/dommy.js"></script>
+</head>
+</body>
+    <h1 id = appName> Pic.<span style="color:#ff521e">it</span></h1>
+    <div class = "whiteBoxLogin">
+      <div id = "invalidCredError"> Invalid username or password. </div>
+        <div id = "loginMissingFields"> Missing fields. </div>
+      <div class = "inputContainerLogin">
+        <form>
+          <ul class = "flex-outer">
+            <li>
+              <input type = "text" id="userName" placeholder="Username">
+            </li>
+            <li>
+              <input type = "text" id="password" placeholder="Password">
+            </li>
+          </ul>
+        </form>
+      </div>
+      <div class = "loginInWrapper">
+        <button id = "loginButton"> Log in </button>
+      </div>
+      <p id= "signUpLink"> Don't have an account? <a style="color:#ff521e" href="/">Sign up</a> </p>
+    </div>
+</body>
+</html>
