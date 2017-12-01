@@ -76,6 +76,11 @@ app.get('/', (req, res) => {
 	res.render("main/index");
 });
 
+// Access login page from sign up start screen
+app.get('/login.ejs', (req, res) => {
+	res.render("main/login");
+});
+
 MongoClient.connect(DB_uri, function(err, db) {
 	console.log('Connected to database');
 	//Sets db into database
