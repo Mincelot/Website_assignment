@@ -24,6 +24,7 @@ $(document).ready(function(){
         },
         200 : function(response){
           console.log("Successfully logged in.");
+		  $(location).attr('href', '/index');
         }
       }
     })

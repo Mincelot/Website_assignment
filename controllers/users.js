@@ -45,8 +45,13 @@ module.exports = {
 		});
 	},
 	logout: function(req,res, next){
-		delete req.session;
-		return res.status(200).json({success:'user logged out'});
+		req.session.destroy(function(err){
+			if(err){
+				return res.status(500).json({error:"Something went wrong"});
+			}
+			return res.status(200).json({success:'user logged out'});
+		});
+		
 	},
 	get: function(req,res,next){
 		if(!req.loggedIn && !req.query.uid){

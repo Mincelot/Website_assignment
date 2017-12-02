@@ -4,6 +4,7 @@
 	<link href="index.css" rel="stylesheet" type="text/css">
 	<link href="popupBox.css" rel="stylesheet" type="text/css">
 	<link href="map.css" rel="stylesheet" type="text/css">
+	<link href="/messageCenter.css" rel="stylesheet" type="text/css">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans|Saira" rel="stylesheet">
 	<!-- <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 	<meta charset="utf-8"> -->
@@ -13,6 +14,8 @@
 	<script src="./js/photoRetriever.js"></script>
 	<script src="./js/loadPhotos.js"></script>
 	<script src="./js/index.js"></script>
+	<script type='text/javascript'>var username =<%-JSON.stringify(data)%>.username;</script>
+	<script src="/js/messageDisplay.js"></script>
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYavyt5BbZYcyuDUe14QhGJwHCb_qbnOE"></script>
 </head>
 <body>
@@ -28,7 +31,8 @@
 		</div>
 	</div>
 	<div class = "container">
-		<div class = "section-title"> PicIt</div>
+		<div id='banner' class='msgBaner'></div>
+		<ul id="msgs"> </ul>
 		<div class = "all-photos-container">
 			<div class = "column-1 column">
 			</div>

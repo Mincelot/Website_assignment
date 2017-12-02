@@ -60,13 +60,15 @@ module.exports = {
 				return res.status(500).json({error:"Retrieval for message failed"});
 			}
 			if(msgs == null){
-				return res.json({});
+				next([]);
+				return [];
 			}
 			var usermsgs = [];
 			for (i = 0; i < msgs.length; i++){
 				usermsgs.push(msgs[i]["message"]);
 			}
-			return res.json({data: usermsgs});
+			next(usermsgs);
+			return usermsgs;
 		});
 	}
 }	

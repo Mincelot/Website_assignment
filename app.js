@@ -44,6 +44,14 @@ app.use(function(req,res,next){
 	next();
 });
 
+// Allow CORS
+app.use(function(req, res, next) {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	next();
+});
+
+
 //Middleware ends here
 
 
@@ -51,7 +59,7 @@ app.put('/user', userController.create);
 app.get('/user', userController.get);
 
 app.post('/login', userController.login);
-app.post('/logout', userController.logout);
+app.get('/logout', userController.logout);
 
 app.get('/api/messages', messageController.get);
 app.post('/api/messages', messageController.broadcast);
@@ -61,21 +69,33 @@ app.get('/user/messages', function(req, res, next){
 	if (req.loggedIn){
 		messageController.getMsgstoUser(req, res, function (msgs){
 			console.log(msgs);
-			res.render("user/messageCenter",{data : {username: req.session.username, messages: msgs}});
+			res.json({messages: msgs});
 		});
 		
 	} else {
-		res.send("Please login first!");
-		// Redirect to login screen
+		res.json({messages: []});
 	}
 });
 // Support routes
 app.get('/', (req, res) => {
-	res.render("main/index");
+	res.redirect("/index");
+});
+
+app.get('/index', (req, res) => {
+	if (req.loggedIn){
+		messageController.getMsgstoUser(req, res, function (msgs){
+			console.log(msgs);
+			res.render("main/index", {data : {username: req.session.username}});
+		});
+	}
+	else{
+		// Redirect to login screen
+		res.redirect('/loginpage');
+	}
 });
 
 // Access login page from sign up start screen
-app.get('/login.ejs', (req, res) => {
+app.get('/loginpage', (req, res) => {
 	res.render("main/login");
 });
 
