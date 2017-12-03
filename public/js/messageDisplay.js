@@ -8,7 +8,7 @@ function tick(){
 	success: function(data){
 		messages = data.messages;
 		$('#msgs').empty();
-		if (messages.length > 0){
+		if (messages.length > 0 && messages[index] != null){
 			$('#msgs').append('<li>' + messages[index] + '</li>')
 			index = (index + 1) % messages.length;
 		}
