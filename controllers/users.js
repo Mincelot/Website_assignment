@@ -4,11 +4,11 @@
 var crypto = require('crypto');
 module.exports = {
 	create: function(req, res,next){
-		if(req.body.username == undefined || req.body.password == undefined || req.body.firstName == undefined || req.body.lastName == undefined){
+		if(req.body.username == "" || req.body.password == "" || req.body.firstName == "" || req.body.lastName == ""){
 			return res.status(400).json({error:"Missing fields"});
 		}
 		req.db.collection('users').insert({
-			username : req.body.username, 
+			username : req.body.username,
 			password : crypto.createHash('md5').update(req.body.password).digest("hex"),
 			firstName : req.body.firstName,
 			lastName : req.body.lastName
@@ -23,7 +23,7 @@ module.exports = {
 		});
 	},
 	login: function(req,res, next){
-		if(req.body.username == undefined || req.body.password == undefined){
+		if(req.body.username == "" || req.body.password == ""){
 			return res.status(400).json({error:"Missing fields"});
 		}
 		req.db.collection('users').findOne({
@@ -51,7 +51,7 @@ module.exports = {
 			}
 			return res.status(200).json({success:'user logged out'});
 		});
-		
+
 	},
 	get: function(req,res,next){
 		if(!req.loggedIn && !req.query.uid){

@@ -22,7 +22,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({secret:'501brainnotimplemented'}));
 /*
-Set database in every request. This way we don't have to make a new connection to 
+Set database in every request. This way we don't have to make a new connection to
 Mongo everytime.
 */
 app.use(function(req, res, next){
@@ -71,7 +71,7 @@ app.get('/user/messages', function(req, res, next){
 			console.log(msgs);
 			res.json({messages: msgs});
 		});
-		
+
 	} else {
 		res.json({messages: []});
 	}
@@ -98,6 +98,10 @@ app.get('/index', (req, res) => {
 app.get('/loginpage', (req, res) => {
 	res.render("main/login");
 });
+
+app.get('/signUp', (req, res) => {
+	res.render("main/startScreen");
+})
 
 MongoClient.connect(DB_uri, function(err, db) {
 	console.log('Connected to database');

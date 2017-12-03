@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed');
+
 /* Render the background black when the box pops out*/
 .popupBox {
 	display: none;
 	background-color: rgba(0,0,0,0.75);
-    position: fixed; 
+    position: fixed;
     z-index: 1;
     left: 0;
     top: 0;
@@ -71,7 +73,7 @@
     width: 75%;
     background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,0));
     text-align: left;
-	font-family: 'Open Sans', sans-serif;
+		font-family: 'Open Sans', sans-serif;
     display:flex;
     justify-content:space-between;
     transition:opacity 300ms;
@@ -85,3 +87,28 @@
 	padding: 10px;
 }
 
+.addPhotoWrapper{
+	margin: 0 auto;
+	position: absolute;
+	left: 42.5%;
+	top: 15%;
+	display: block;
+}
+
+#addPhotoButton{
+	cursor: pointer;
+	/*pointer-events:initial;*/
+	background: #F8F9F9;
+	border-color: #f2f2f2;
+	color: black;
+	border: 1px solid;
+	border-radius: 3px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	flex: 1 0 0px;
+	font-family: 'Barlow Semi Condensed', sans-serif;
+	font-size: 17px;
+	padding: 5px 25px;
+	outline: none;
+	font-weight: 600;
+}
