@@ -87,7 +87,7 @@
 	padding: 10px;
 }
 
-#addPhotoButton{
+.editButton{
 	border-radius: 5px;
 	cursor: pointer;
 	background: #ff521e;
