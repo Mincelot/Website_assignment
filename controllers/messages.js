@@ -3,11 +3,11 @@
 */
 module.exports = {
 	broadcast : function(req, res, next){
-		if (req.body.message == undefined){
-			return res.status(400).json({error:"Missing fields: message"});
+		if (req.body.data == undefined){
+			return res.status(400).json({error:"Missing field: data"});
 		}
 		req.db.collection('counters').findAndModify({_id: "messageId" }, [['_id','asc']], {$inc:{sequence_value: 1}},{new:true}, function(err, doc){
-			req.db.collection('messages').insert({msgId : doc.value.sequence_value, message : req.body.message}, function(err, result){
+			req.db.collection('messages').insert({msgId : doc.value.sequence_value, message : req.body.data}, function(err, result){
 				if (err){
 					if (err.code == 11000){
 						return res.status(409).json({error:"Message already exist."});
