@@ -31,6 +31,8 @@ function retrievePhoto(id){
 			} else {
 				$('.infoPanelContent').append('<p></p>');
 			}
+			$('.infoPanelContent').append('<p> Delete this photo    <button id = "deletePhotoButton" class = "editButton"> - </button></p>')
+			$('.infoPanelContent').append('<p> Change this photo    <button id = "changePhotoButton" class = "editButton"> ^ </button></p>')
 			$('.infoPanelContent').append('<p>' + data.likes + ' <font color="#d82475"> &#x2764; </font></p>');
 			$('#photoViewer').fadeIn(300); // Display popup box
 		}
@@ -43,6 +45,36 @@ $(function (){
 		$('#mapPopUpBox').toggle('slow', function(){
 			initMap($('.infoPanelContent').attr('latitude'), $('.infoPanelContent').attr('longitude'));
 		});
+	});
+	
+	$('.infoPanelContent').on("click", '#deletePhotoButton', function (){
+		alert("Deleted " + photoid + " from " + username +"'s collection!");
+		//---------------------------------- Call the delete this photo from a user's collection function here, use photoid and username as above -------------------------------------
+		
+		// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		location.reload();
+	});
+	
+	$('.infoPanelContent').on("click", '#changePhotoButton', function (){
+		var new_photoid = prompt("The id for this photo is: " + photoid +"\nYou can change this photo to another photo on the Unsplash website by entering the new photo's id below:")
+		if (new_photoid != null){
+			$.ajax({ 
+				type: 'GET',
+				url: 'https://api.unsplash.com/photos/'+new_photoid+'?client_id='+clientId,
+				error: function(res){
+					alert("Failed to change photo, please make sure the new photo id exists in Unsplash");
+				},
+				success: function(data){
+					alert("Changed " + photoid + " to " + new_photoid + " in " + username +"'s collection!");
+					//---------------------------------- Call the PUT function here, use new_photoid, photo_id and username as above -------------------------------------
+					
+					//----------------------------------------------------------------------------------------------------------------------------------------------------
+				}
+			});
+			location.reload();
+		}
+		
+		
 	});
 	
 	$('.closeButton').click(function (){ // When the close button is pressed, close it.

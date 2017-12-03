@@ -31,7 +31,7 @@ function retrievePhoto(id){
 			} else {
 				$('.infoPanelContent').append('<p></p>');
 			}
-			$('.infoPanelContent').append('<p> Add to my collection    <button id = "addPhotoButton"> + </button></p>')
+			$('.infoPanelContent').append('<p> Add to my collection    <button id = "addPhotoButton" class = "editButton"> + </button></p>')
 			$('.infoPanelContent').append('<p>' + data.likes + ' <font color="#d82475"> &#x2764; </font></p>');
 			$('#photoViewer').fadeIn(300); // Display popup box
 		}
