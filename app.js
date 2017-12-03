@@ -121,12 +121,3 @@ MongoClient.connect(DB_uri, function(err, db) {
 	database = db;
 	app.listen(3000, () => console.log('Listening'));
 });
-
-MongoClient.connect(DB_uri, function(err, db) {
-  if (err) throw err;
-  db.collection("UserToImageMapping").find({}).toArray(function(err, result) {
-    if (err) throw err;
-    console.log(result);
-    db.close();
-  });
-});

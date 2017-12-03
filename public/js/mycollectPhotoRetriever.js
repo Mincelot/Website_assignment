@@ -54,11 +54,11 @@ $(function (){
 			url : '/api/removeImage/'+ photoid,
 			statusCode : {
 				200: function(response){
-							alert("Deleted " + photoid + " from " + username +"'s collection!");
+					alert("Deleted " + photoid + " from " + username +"'s collection!");
+					location.reload();
 				}
 			}
 		});
-		location.reload();
 	});
 
 	$('.infoPanelContent').on("click", '#changePhotoButton', function (){
@@ -82,13 +82,13 @@ $(function (){
 						url: '/api/updateImage/'+username+'/'+photoid,
 						statusCode : {
 							200: function(response){
-									alert("Changed " + photoid + " to " + new_photoid + " in " + username +"'s collection!");
+								alert("Changed " + photoid + " to " + new_photoid + " in " + username +"'s collection!");
+								location.reload();
 							}
 						}
 					});
 				}
 			});
-			location.reload();
 		}
 
 
