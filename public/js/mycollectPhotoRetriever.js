@@ -47,37 +47,53 @@ $(function (){
 			initMap($('.infoPanelContent').attr('latitude'), $('.infoPanelContent').attr('longitude'));
 		});
 	});
-	
+
 	$('.infoPanelContent').on("click", '#deletePhotoButton', function (){
-		alert("Deleted " + photoid + " from " + username +"'s collection!");
-		//---------------------------------- Call the delete this photo from a user's collection function here, use photoid and username as above -------------------------------------
-		
-		// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		$.ajax({
+			type: 'DELETE',
+			url : '/api/removeImage/'+ photoid,
+			statusCode : {
+				200: function(response){
+							alert("Deleted " + photoid + " from " + username +"'s collection!");
+				}
+			}
+		});
 		location.reload();
 	});
-	
+
 	$('.infoPanelContent').on("click", '#changePhotoButton', function (){
 		var new_photoid = prompt("The id for this photo is: " + photoid +"\nYou can change this photo to another photo on the Unsplash website by entering the new photo's id below:")
+		console.log(new_photoid)
 		if (new_photoid != null){
-			$.ajax({ 
+			$.ajax({
 				type: 'GET',
 				url: 'https://api.unsplash.com/photos/'+new_photoid+'?client_id='+clientId,
 				error: function(res){
 					alert("Failed to change photo, please make sure the new photo id exists in Unsplash");
 				},
 				success: function(data){
-					alert("Changed " + photoid + " to " + new_photoid + " in " + username +"'s collection!");
-					//---------------------------------- Call the PUT function here, use new_photoid, photo_id and username as above -------------------------------------
-					
-					//----------------------------------------------------------------------------------------------------------------------------------------------------
+					var update = {
+						username: username,
+						imageId: new_photoid
+					}
+					$.ajax({
+						type: 'PUT',
+						data: update,
+						url: '/api/updateImage/'+username+'/'+photoid,
+						statusCode : {
+							200: function(response){
+									alert("Changed " + photoid + " to " + new_photoid + " in " + username +"'s collection!");
+							}
+						}
+					});
 				}
 			});
 			location.reload();
 		}
-		
-		
+
+
 	});
-	
+
 	$('.closeButton').click(function (){ // When the close button is pressed, close it.
 		$('#photoViewer').fadeOut(300);
 		//$('.infoPanelContent').hide();

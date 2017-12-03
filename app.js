@@ -12,6 +12,7 @@ var database = null;
 //Controllers
 var userController = require('./controllers/users.js');
 var messageController = require('./controllers/messages.js');
+var myCollectionController = require('./controllers/myCollection.js');
 
 // Middleware starts here
 
@@ -65,6 +66,11 @@ app.get('/api/messages', messageController.get);
 app.post('/api/messages', messageController.broadcast);
 app.delete('/api/messages/:msgId', messageController.delete);
 
+app.post('/api/addToCollection', myCollectionController.create);
+app.get('/api/getUserCollection/:username', myCollectionController.get);
+app.delete('/api/removeImage/:imageId', myCollectionController.delete);
+app.put('/api/updateImage/:username/:imageId', myCollectionController.update);
+
 app.get('/user/messages', function(req, res, next){
 	if (req.loggedIn){
 		messageController.getMsgstoUser(req, res, function (msgs){
@@ -114,4 +120,13 @@ MongoClient.connect(DB_uri, function(err, db) {
 	//Sets db into database
 	database = db;
 	app.listen(3000, () => console.log('Listening'));
+});
+
+MongoClient.connect(DB_uri, function(err, db) {
+  if (err) throw err;
+  db.collection("UserToImageMapping").find({}).toArray(function(err, result) {
+    if (err) throw err;
+    console.log(result);
+    db.close();
+  });
 });

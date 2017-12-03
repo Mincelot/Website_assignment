@@ -46,10 +46,19 @@ $(function (){
 			initMap($('.infoPanelContent').attr('latitude'), $('.infoPanelContent').attr('longitude'));
 		});
 	});
-	
+
 	$('.infoPanelContent').on("click", '#addPhotoButton', function (){
-		alert("Added " + photoid + " to " + username +"'s collection!");
-		//---------------------------------- Call the add to user function here, use photoid and username as above -------------------------------------
+		var mapping = {username : username, imageId : photoid};
+		$.ajax({
+			type: 'POST',
+			url : '/api/addToCollection',
+			data: mapping,
+			statusCode : {
+				200 : function(response){
+					alert("Added " + photoid + " to " + username +"'s collection!");
+				}
+			}
+		});
 	});
 
 	$('.closeButton').click(function (){ // When the close button is pressed, close it.
