@@ -83,10 +83,7 @@ app.get('/', (req, res) => {
 
 app.get('/index', (req, res) => {
 	if (req.loggedIn){
-		messageController.getMsgstoUser(req, res, function (msgs){
-			console.log(msgs);
-			res.render("main/index", {data : {username: req.session.username}});
-		});
+		res.render("main/index", {data : {username: req.session.username}});
 	}
 	else{
 		// Redirect to login screen
@@ -103,6 +100,15 @@ app.get('/signUp', (req, res) => {
 	res.render("main/startScreen");
 })
 
+app.get('/user/collection', (req, res) => {
+	if (req.loggedIn){
+		res.render("main/collection", {data : {username: req.session.username}});
+	}
+	else{
+		// Redirect to login screen
+		res.redirect('/loginpage');
+	}
+})
 MongoClient.connect(DB_uri, function(err, db) {
 	console.log('Connected to database');
 	//Sets db into database

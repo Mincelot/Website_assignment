@@ -28,6 +28,8 @@ $(document).ready(function() {
           },
           200: function(response){
             console.log("Successfully added a user.");
+			// redirect to login page
+			$(location).attr('href', '/loginpage')
           }
         }
       });

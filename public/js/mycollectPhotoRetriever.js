@@ -31,7 +31,6 @@ function retrievePhoto(id){
 			} else {
 				$('.infoPanelContent').append('<p></p>');
 			}
-			$('.infoPanelContent').append('<p> Add to my collection    <button id = "addPhotoButton"> + </button></p>')
 			$('.infoPanelContent').append('<p>' + data.likes + ' <font color="#d82475"> &#x2764; </font></p>');
 			$('#photoViewer').fadeIn(300); // Display popup box
 		}
@@ -46,11 +45,6 @@ $(function (){
 		});
 	});
 	
-	$('.infoPanelContent').on("click", '#addPhotoButton', function (){
-		alert("Added " + photoid + " to " + username +"'s collection!");
-		//---------------------------------- Call the add to user function here, use photoid and username as above -------------------------------------
-	});
-
 	$('.closeButton').click(function (){ // When the close button is pressed, close it.
 		$('#photoViewer').fadeOut(300);
 		//$('.infoPanelContent').hide();

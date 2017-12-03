@@ -27,8 +27,8 @@ $(function(){
 	});
 	
 	$('#banner').append('<h3><font size=10px>Pic.</font><font color="#ff521e" size=10px>It</font></h3>');
-	$('#banner').append('<div class="statusBar">' + '<span class="welcome">' + "Hi there " + username + '! </span>'+ 
-	 '<button class="bannerButton" id="logoff">Logoff</button>'+ '<button class="bannerButton" id="collection">My Collection</button>' +'</div>');
+	$('#banner').append('<div class="statusBar">' + '<span class="welcome">' + "Welcome to your photo collection " + username + '! </span>'+ 
+	 '<button class="bannerButton" id="logoff">Logoff</button>'+ '<button class="bannerButton" id="collection">Main page</button>' +'</div>');
 	
 	$('#logoff').click(function (){ // Logoff button pressed
 		$.ajax({
@@ -42,9 +42,9 @@ $(function(){
 	})
 	
 	
-	$('#collection').click(function (){ // My collection button pressed
-		// redirect to collction page
-		$(location).attr('href', '/user/collection')
+	$('#collection').click(function (){ // Main page button pressed
+		// redirect to main page
+		$(location).attr('href', '/index')
 	})
 	tick();
 	
