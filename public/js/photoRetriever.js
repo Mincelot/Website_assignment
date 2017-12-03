@@ -9,6 +9,7 @@ function retrievePhoto(id){
 		url: 'https://api.unsplash.com/photos/'+id+'?client_id='+clientId,
 		success: function(data){
 			console.log(data);
+			$('#banner').css('display','none');
 			$('.popupBoxContent').css('padding-top', (data.height/data.width)*100+'%');
 			$('.popupBoximg').remove(); // Clear the old image
 			$('<img />', { // Add new image
@@ -55,6 +56,7 @@ $(function (){
 		$('#photoViewer').fadeOut(300);
 		//$('.infoPanelContent').hide();
 		$('#mapPopUpBox').hide();
+		$('#banner').css('display','flex');
 	});
 
 	$(window).click(function(event){ // The photoViewer will not be displayed if the current window is clicked

@@ -17,18 +17,9 @@ function tick(){
 	
 }
 $(function(){
-	$.ajax({ // Request a random photo from API for now
-	type: 'GET',
-	url: 'https://api.unsplash.com/photos/random'+'?client_id='+clientId,
-	success: function(data){
-		console.log(data);
-		$('body').css("background-image", 'url('+ data.urls.full+ ')');
-	}
-	});
-	
 	$('#banner').append('<h3><font size=10px>Pic.</font><font color="#ff521e" size=10px>It</font></h3>');
 	$('#banner').append('<div class="statusBar">' + '<span class="welcome">' + "Hi there " + username + '! </span>'+ 
-	 '<button class="bannerButton" id="logoff">Logoff</button>'+ '<button class="bannerButton" id="collection">My Collection</button>' +'</div>');
+	 '<button class="bannerButton" id="logoff">Log Out</button>'+ '<button class="bannerButton" id="collection">My Collection</button>' +'</div>');
 	
 	$('#logoff').click(function (){ // Logoff button pressed
 		$.ajax({

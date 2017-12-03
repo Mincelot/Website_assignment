@@ -5,28 +5,19 @@
   <!-- kept the same style sheet because most of the styles are the same as the sign up page -->
   <script src="./js/login.js"></script>
   <script src = "https://rawgit.com/Manak/dommy/master/dommy.js"></script>
+  <title> Pic.it - login </title>
 </head>
-</body>
-    <h1 id = appName> Pic.<span style="color:#ff521e">it</span></h1>
-    <div class = "whiteBoxLogin">
-      <div id = "invalidCredError"> Invalid username or password. </div>
-        <div id = "loginMissingFields"> Missing fields. </div>
-      <div class = "inputContainerLogin">
-        <form>
-          <ul class = "flex-outer">
-            <li>
-              <input type = "text" id="userName" placeholder="Username">
-            </li>
-            <li>
-              <input type = "text" id="password" placeholder="Password">
-            </li>
-          </ul>
-        </form>
-      </div>
-      <div class = "loginInWrapper">
+<body>
+    <div class = "login-container">
+      <h1 id = appName> Pic.<span style="color:#ff521e">it</span></h1>
+      <div class = "input-container">
+        <input type = "text" id="userName" placeholder="Username">
+        <input type = "password" id="password" placeholder="Password">
         <button id = "loginButton"> Log in </button>
+        <div id = "invalidCredError"> Invalid username or password. </div>
+        <div id = "loginMissingFields"> Missing fields. </div>
+        <p id= "signUpLink"> Don't have an account? <a style="color:#ff521e" href="/signUp">Sign up</a> </p>
       </div>
-      <p id= "signUpLink"> Don't have an account? <a style="color:#ff521e" href="/signUp">Sign up</a> </p>
     </div>
 </body>
 </html>

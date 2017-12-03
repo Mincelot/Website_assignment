@@ -11,6 +11,7 @@ function retrievePhoto(id){
 			console.log(data);
 			$('.popupBoxContent').css('padding-top', (data.height/data.width)*100+'%');
 			$('.popupBoximg').remove(); // Clear the old image
+			$('#banner').css('display','none');
 			$('<img />', { // Add new image
 				class: "popupBoximg",
 				src: data.urls.full,
@@ -80,6 +81,7 @@ $(function (){
 	$('.closeButton').click(function (){ // When the close button is pressed, close it.
 		$('#photoViewer').fadeOut(300);
 		//$('.infoPanelContent').hide();
+		$('#banner').css('display','flex');
 		$('#mapPopUpBox').hide();
 	});
 
